@@ -179,11 +179,10 @@ export default function LecturePage({ course, titles }) {
 
         <Divider style={{ margin: 10, width: '70%', background: '#ffffff', borderTop: 'thin solid black' }} />
 
-        <LectureCards title="Lecture Info" content={course.lectures[lectureId].title} />
+        <LectureCards title="Lecture Info" content={course.lectures[lectureId].about} />
 
         <div style={{ display: 'flex', flexWrap: 'wrap', maxWidth: 900, alignItems: 'center', justifyContent: 'center' }}>
-          <LectureCards title="Exercise" content={course.lectures[lectureId].title} />  
-          <LectureCards title="Answer" content={course.lectures[lectureId].title} />
+          <LectureCards title="Exercise" content={course.lectures[lectureId].exercise_question} />  
         </div>
 
         {/* <div style={{ outline: 'thin solid black' }}>
