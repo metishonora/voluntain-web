@@ -164,7 +164,7 @@ export default function LecturePage({ course, titles }) {
     selected: {},
   });
   const classes = useStyles();
-
+  {/*Sidebar*/}
   const sidebar = () => (
     <aside className={styles.lectureSidebar}>
       <ListItem onClick={responsivesidebar} style={{ height: 60 }}>

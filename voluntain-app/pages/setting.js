@@ -133,6 +133,9 @@ export default function Setting( { titles } ) {
                 <NavigationBar titles={titles} />
                 <MainBanner />
             </div>
+            {/*Policy Section*/}
+            {/*각 문단별 Paper(material-ui)로 구성*/}
+            {/*CSS - 제목:aboutfont2, 본문:aboutfont*/}
             <main>
                 <div>
                     <Paper className={styles.about}>
@@ -716,14 +719,13 @@ personal information, please visit: voluntain.skku.ac.kr/setting.
     );
 }
 
+// {url}/courses/title에 GET Request 보내 course title list 받아오기(id, title)
 export const getStaticProps = async () => {
-
-    // 이거 courses에서 뽑아오고 싶은데??
     const data0 = await fetch(`${url}/courses/title`);
     const titles = await data0.json();
   
     return {
       props: {  titles },
-      revalidate: 1,//몇 초로 할지?
+      revalidate: 1,
     };
   };

@@ -2,12 +2,10 @@ import React from 'react'
 import Head from 'next/head'
 import { NavigationBar } from '../components/NavigationBar'
 import { MainBanner } from '../components/MainBanner'
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import styles from '../styles/Home.module.css'
 import { url } from '../config/next.config' //url 가져오기
-
 
 export default function Page( { titles }) {
   return (
@@ -19,8 +17,11 @@ export default function Page( { titles }) {
         <NavigationBar titles={titles} />
         <MainBanner />
       </div>
+      {/*about contents - 3개의 Paper(material-ui)로 구성*/}
+      {/* CSS : 제목 - abouttitle, 소제목 - aboutfont2, 본문 - aboutfont */}
       <main>
         <div>
+          {/*로고와 Introduction section */}
           <Paper className={styles.about}>
             <Grid container spacing={2}>
               <Grid item xs={3}>
@@ -50,6 +51,7 @@ export default function Page( { titles }) {
             </Grid>
           </Paper>
         </div>
+        {/*Vision Section*/}
         <div>
           <Paper className={styles.about}>
             <Grid container spacing={2}>
@@ -90,6 +92,7 @@ export default function Page( { titles }) {
           </Grid>
         </Paper>
       </div>
+      {/*History Section*/}
       <div>
         <Paper className={styles.about}>
           <Grid container spacing={2}>
@@ -119,14 +122,14 @@ export default function Page( { titles }) {
     
   )
 }
+// {url}/courses/title에 GET Request 보내 course title list 받아오기(id, title)
 export const getStaticProps = async () => {
 
-  // 이거 courses에서 뽑아오고 싶은데??
   const data0 = await fetch(`${url}/courses/title`);
   const titles = await data0.json();
 
   return {
     props: {  titles },
-    revalidate: 1,//몇 초로 할지?
+    revalidate: 1,
   };
 };

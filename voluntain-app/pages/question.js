@@ -21,17 +21,21 @@ export default function Page( { titles } ) {
     return (
         <div className={styles.container}>
             <NavigationBar titles={titles}/>
-            <MainBanner/> 
+            <MainBanner/>
+        {/*Q&A section*/} 
         <main className={styles.main}>
+          {/*Q&A 타이틀 */}
             <Typography component="h1" variant="h2" align="center" color="textPrimary">
               Q&A
             </Typography>
             <Divider style={{ margin: 15, width: '5%', background: '#ffffff', borderTop: 'thin solid black' }} />
+            {/*Q&A 문구 */}
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               If you have any questions, feel free to ask!
             </Typography>
         
             <br></br>
+            {/*DISQUS 댓글 section */}
             <div style={{ width: 900, height: 90, alignItems: 'center' }}>
                 <DiscussionEmbed
                     shortname={disqusShortname}
@@ -43,14 +47,14 @@ export default function Page( { titles } ) {
     )
 }
 
+// {url}/courses/title에 GET Request 보내 course title list 받아오기(id, title)
 export const getStaticProps = async () => {
 
-  // 이거 courses에서 뽑아오고 싶은데??
   const data0 = await fetch(`${url}/courses/title`);
   const titles = await data0.json();
 
   return {
     props: {  titles },
-    revalidate: 1,//몇 초로 할지?
+    revalidate: 1,
   };
 };
