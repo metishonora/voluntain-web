@@ -1,32 +1,28 @@
 import styles from '../styles/Home.module.css'
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Link from 'next/link'
+import Link from 'next/link' // 속도 저하? 대신 a 태그 사용
 
-{/* class=""으로 바로 css 적용 안됨 */}
 /**
+ * @note
+ * 상위 MainCard 컴포넌트에서 전달받은 props를 나타내는 레이아웃 컴포넌트
+ * @see MainCard
  * 
  * @param {*} props 
- * @Properties
- * - title: 강좌 제목
- * - img: 강좌 아이콘 파일 경로
+ * @properties
+ * - title: course 제목
+ * - img: course 아이콘 파일 경로
  * - content: 강좌 소개
  * - link: 강좌 페이지 링크 
- * - difficulty: 난이도 (1 ~ 5)
- * 
- * @returns 
+ * - level: 난이도 (1 ~ 5)
  */
 export const CourseCard = (props)=> {
-    // const stars= [ " ", "★", "★ ★", "★ ★ ★", "★ ★ ★ ★", "★ ★ ★ ★ ★"]
-    let stars = new Map(
-        [
-            ["easy", "★"], ["normal", "★ ★"], ["hard", "★ ★ ★"]
-        ]
-    );
+    // 난이도에 따른 별 기호
+    let stars = new Map([["easy", "★"], ["normal", "★ ★"], ["hard", "★ ★ ★"]]);
 
     return(
-        <div>
-            <Link href={props.link}>
+        <div className={styles.coursecard}>
+            <a href={props.link}>
             <Card className={styles.maincard}>
                 <Card.Img variant="top" src={props.img} className={styles.cardimg}/>
                 <Card.Body>
@@ -39,7 +35,7 @@ export const CourseCard = (props)=> {
                 </Card.Footer>
                 </Card.Body>
             </Card>
-            </Link>
+            </a>
       </div>
     );
 };

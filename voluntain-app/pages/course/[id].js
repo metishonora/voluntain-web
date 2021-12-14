@@ -10,7 +10,6 @@ import { Button, Collapse, Drawer, Fab, List, ListItem, ListItemText, Hidden } f
 import Youtube from 'react-youtube'
 import { useWindowSize } from '../../components/useWindowSize';
 
-import { NavigationBar } from '../../components/NavigationBar'
 import { LectureCards } from '../../components/LectureCards'
 import styles from '../../styles/Home.module.css'
 
@@ -31,8 +30,8 @@ export default function LecturePage({ course, titles }) {
    * @see https://www.npmjs.com/package/react-cookie
    */
   const [cookies, setCookie, removeCookie] = useCookies(['courseId', 'lectureId', 'videoEnd', 'noCookie']);
-
-  //for exercise link
+  
+  //exercise link button을 위한 state
   const [targetPlayer, setTargetPlayer] = useState({});
 
   /**
@@ -64,9 +63,21 @@ export default function LecturePage({ course, titles }) {
     height: size.height > 650 ? '600' : size.height - 50,
     width: size.width > 1050 ? '900' : size.width - 250,
     playerVars: {
+      // To check other variables, check:
+      // https://developers.google.com/youtube/player_parameters
       cc_load_policy: 1,
       modestbranding: 1,
     }
+  }
+
+  function renderRow(props) {
+    const { index, style } = props;
+
+    return (
+      <ListItem button style={style} key={index}>
+        <ListItemText primary={`Lecture ${index + 1}`} />
+      </ListItem>
+    );
   }
 
   /**
@@ -79,39 +90,48 @@ export default function LecturePage({ course, titles }) {
     setOpenSidebar(!openSidebar)
   };
 
-  //exercise 관련 함수
-  //현재 video 저장
+
+  //exercise link button 관련 함수
+  ////현재 lecture의 video를 targetPlayer에 저장 (player 로드 완료시 실행됨)
   const onPlayerReady = (event) => {
     setTargetPlayer(targetPlayer => event.target);
   }
 
-  //exercise answer 시간으로 이동
-  const toExercise = (e) => {
-    e.preventDefault();
+  ////현재 lecture video에서 exercise answer가 재생되는 시간으로 이동 (button 클릭시 실행됨)
+  const toExercise = (event) => {
+
     targetPlayer.seekTo(course.lectures[lectureId].exercise_answer, true);
+  
   }
 
+
+  //사이드 바 관련 함수 (특정 강의 클릭시 실행됨)
+  ////처음 강의, 마지막 강의 여부에 따라 prev, next button 활성화 여부 결정
   const handleClick = (lecture_number) => {
     setLectureId(lectureId => lecture_number);
-    if (lecture_number == course.lectures.length - 1) {
+    if (lecture_number == course.lectures.length - 1) { //마지막 강의
       setLastLecture(isLastLecture => 1);
       setFirstLecture(isFirstLecture => 0)
 
-    } else if (lecture_number == 0) {
+    } else if (lecture_number == 0) { //처음 강의
       setLastLecture(isLastLecture => 0);
       setFirstLecture(isFirstLecture => 1)
 
     } else {
-      setLastLecture(isLastLecture => 0);
+      setLastLecture(isLastLecture => 0); //중간 강의
       setFirstLecture(isFirstLecture => 0)
     }
   }
 
+  // next 버튼 클릭 시 lecture 이동 & 버튼 활성화
   const nextLecture = () => {
     setLectureId(lectureId => lectureId + 1);
 
+    // setLectureId 반영이 늦게 되어서 다음과 같이 식 작성
     if (lectureId + 1 == course.lectures.length - 1) {
       setLastLecture(isLastLecture => 1);
+      setFirstLecture(isFirstLecture => 0);
+      
       //console.log('1');
     }
     else {
@@ -122,11 +142,12 @@ export default function LecturePage({ course, titles }) {
     console.log(lectureId);
   }
 
+  // prev 버튼 클릭 시 lecture 이동 & 버튼 활성화
   const prevLecture = () => {
     setLectureId(lectureId => lectureId - 1);
     if (lectureId - 1 == 0) {
       setFirstLecture(isFirstLecture => 1);
-      //console.log('1');
+      setLastLecture(isLastLecture => 0);
     }
     else {
       setFirstLecture(isFirstLecture => 0);
@@ -136,10 +157,11 @@ export default function LecturePage({ course, titles }) {
     console.log(lectureId);
   }
 
-  const disqusShortname = "voluntain-skku"
+  // disqus 설정
+  const disqusShortname = "skku-voluntain"
   const disqusConfig = {
-    url: "https://localhost:3000/course",
-    identifier: course.lectures[lectureId].id, // Single post id
+    url: "http://localhost:3000/course/"+course.id + '/' + course.lectures[lectureId].lecture_number,
+    identifier : course.id + '/' + course.lectures[lectureId].lecture_number,
     title: course.lectures[lectureId].title // Single post title
   }
 
@@ -208,7 +230,7 @@ export default function LecturePage({ course, titles }) {
         <div className={styles.lectureSidebarComponent}>
           {course.lectures.map((element, index) => {
             return (
-              <List disablePadding>
+              <List key={index} disablePadding>
                 <ListItem button classes={{ root: classes.default, selected: classes.selected }} selected={index == lectureId} onClick={() => { handleClick(element.lecture_number); console.log(`index: ${index}, lectureId: ${lectureId}, ${index == lectureId}`); }}>
                   <ListItemText primary={element.title} style={{ marginLeft: '20px' }} />
                 </ListItem>
@@ -253,10 +275,6 @@ export default function LecturePage({ course, titles }) {
         <title>{course.lectures[lectureId].title} - Voluntain</title>
       </Head>
 
-      <div className="HEADER">
-        <NavigationBar titles={titles} />
-      </div>
-
       <main className={styles.lecturePage}>
         {/* 페이지 너비가 960px 이하일 경우, 사이드바를 숨깁니다. */}
         <Hidden smDown>
@@ -296,9 +314,9 @@ export default function LecturePage({ course, titles }) {
               />
             </div>
             <Button variant="contained" color="primary" onClick={toExercise}>Check Answer</Button>
-
           </div>
 
+          {/* disqus */}
           <div style={{ width: '100%' }}>
             <DiscussionEmbed
               shortname={disqusShortname}
@@ -319,7 +337,7 @@ export default function LecturePage({ course, titles }) {
 };
 
 
-// {url}/courses/id 에 GET Request 보내 courses 정보 받아오기
+// {url}/courses/id에 GET Request 보내 courses 정보 받아오기 & navigation용 title
 export const getStaticProps = async (context) => {
   const data = await fetch(`${url}/courses/${context.params.id}`);
   const course = await data.json();
@@ -333,6 +351,7 @@ export const getStaticProps = async (context) => {
   };
 };
 
+// {url}/courses에 GET Request 보내 courses id 정보 받아오기
 export async function getStaticPaths() {
   const res = await fetch(`${url}/courses`);
   const courses = await res.json();

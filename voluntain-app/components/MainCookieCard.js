@@ -6,8 +6,20 @@ import { Alert } from '@material-ui/lab';
 import { Button } from '@material-ui/core';
 
 /**
- * RecentLecture에 포함되는 카드 부분 컴포넌트입니다.
+ * @note
+ * 상위 RecentLecture 컴포넌트에서 전달받은 props를 나타내는 레이아웃 컴포넌트
+ * @see RecentLecture
+ * 
+ * @param {*} props
+ * @property
+ * - lectures: 상위 컴포넌트에서 받아온 lectures 정보
+ * - severity: material-ui Alert 컴포넌트의 (심각도) 바탕 색, 로고 결정
+ * - title: 표시하려는 lecture title
+ * - text: 표시하려는 설명
+ * - link: 클릭했을 대 연결되는 링크 (표시하려는 lecture 페이지)
+ * - handleClose(): x 표시를 클릭했을 때 실행되는 함수 (쿠키 삭제)
  */
+
 export function MainCookieCard(props) {
   const [cookies, setCookie, removeCookie] = useCookies(['lectureId', 'videoEnd', 'isLastLecture']);
   const [lectureTitle, setLectureTitle] = useState("");

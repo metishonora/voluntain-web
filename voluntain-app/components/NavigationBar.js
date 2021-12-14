@@ -2,7 +2,15 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from '../styles/Home.module.css'
 
-// export default - const difference
+/**
+ * 
+ * @param {*} props 
+ * @property
+ * - titles: 등록된 course title/id 정보
+ * - titles.title: course title
+ * - titles.id: course id -> page 링크로 사용
+ */
+
 export const NavigationBar = (props) => {
   
   return (
@@ -26,7 +34,7 @@ export const NavigationBar = (props) => {
               <Nav.Link href="/question">Q&A</Nav.Link>
               <NavDropdown title="COURSES" id="basic-nav-dropdown">
                 {props.titles.map((item) => (
-                  <NavDropdown.Item href={"/course/" + item.id}>{item.title}</NavDropdown.Item>
+                  <NavDropdown.Item key={item.id} href={"/course/" + item.id}>{item.title}</NavDropdown.Item>
                 ))}
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Other</NavDropdown.Item>
