@@ -1,153 +1,52 @@
-/* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Black+Han+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Signika+Negative:wght@300;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Poppins:wght@400;500;600&family=Ubuntu:wght@700&display=swap');
-
 .container {
-  font-family: 'Noto Sans', sans-serif;
-  --hex-parent-height: 100%;
-}
-
-.titlefont {
-  font-family: 'Signika Negative', sans-serif;
-}
-
-.navwrapper{
+  min-height: 100vh;
+  padding: 0 0.5rem;
   display: flex;
-  background-color: #fafafa;
-}
-
-.navbar{
-  width: 70%;
-  margin: auto;
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 600;
-}
-
-.navcontainer{
-  padding: 0;
-  margin: .1rem;
-  max-width:100%;
-}
-
-.maintitle {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 5rem;
-  text-align: center;
-  /* font-family: 'Black Han Sans', sans-serif; */
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 700;
-}
-
-.slogan {
-  line-height: 3;
-  font-size: 2rem;
-  font-family: 'Indie Flower', cursive;
-}
-
-.contenttitle{
-  display: inline-block;
-  text-align: left;
-  font-size: 2rem;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 1rem;
-}
-
-.content {
-  width: 70%;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 3rem;
-  margin-top: 2rem;
+  height: 100vh;
 }
-/* Main course card*/
-.maincard {
-  flex-direction: row;
-  width: 430px;
-  margin: .3rem;
-}
-.maincard .title{
-  font-size: 2rem;
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 400;
-}
-.maincard .text{
-  height: 70px;
-  padding-top: .2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display:-webkit-box;
-  word-wrap:break-word; 
-  -webkit-line-clamp:3; /* 3줄이상이면 ...으로 줄이기 */ 
-  -webkit-box-orient:vertical;
-  font-family: 'Montserrat', sans-serif;
+
+/* custom */
+.nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #f5f5dc;
 }
 
 .menu{
-  display: flex;  
-  align-items: center;
-  justify-content: center;
-}
-
-.mainwrapper{
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #003458; /* #0c4890 #00498c*/
-  color: white;
-  width: 100%;
-  height: 350px;
-  font-family: 'Exo 2', sans-serif;
-}
+/* custom */
 
 .main {
-  padding: .5rem;
-  margin: .5rem;
+  padding: 5rem 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /*justify-content: center;*/
   align-items: center;
-  width: 100%;
 }
-
 
 .footer {
-  background: #ece6cc;
   width: 100%;
   height: 100px;
-  position: relative;
-  bottom: 0px;
+  border-top: 1px solid #eaeaea;
+  display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px;
-  color: #505050;
-}
-
-.copyright {
-  padding-top: 10px;
-}
-
-.footerItem {
-  border-right: 1px solid #999999;
 }
 
 .footer a {
-  color: #000000;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.footer a:hover {
-  color: #00A553;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .title a {
@@ -161,6 +60,21 @@
   text-decoration: underline;
 }
 
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
 
 .code {
   background: #fafafa;
@@ -180,193 +94,41 @@
   margin-top: 3rem;
 }
 
-.cookiecard {
-  width:70%;
-  flex-direction: row;
-  margin: auto;
-  text-align: center;
-  /* background-color: #d8f5cc; */
-  border-radius: 0;
-  border-style: none;
-  border-width: 2px;
+.card {
+  margin: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  width: 45%;
 }
 
-.cookiecard .button{
-  /* width: 30%; */
-  background-color: inherit;
-  color: black;
-  font-size: 1.5rem;
-  /* height: fit-content; */
-  font-family: 'Ubuntu', sans-serif;
-  border-style: none;
-}
-
-.cookiecard .title{
-  font-size: 1.5rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  padding-top: .3rem; padding-bottom: .3rem;
-}
-
-.cookiecard .text{
-  font-size: 1.2rem;
-  display: inline-block;
-  font-family: 'Poppins', sans-serif;
-}
-
-.cookiecard a{
-  color: #00498c;
-}
-
-.cookiecard a:hover{
+.card:hover,
+.card:focus,
+.card:active {
   color: #0070f3;
+  border-color: #0070f3;
 }
 
-.cardimg {
-  width: 10rem;
-  height: fit-content;
-  margin: .5rem;
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.5;
 }
 
 .logo {
   height: 1em;
   margin-left: 0.5rem;
-} 
-
-.cookieAlert {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
 }
 
-.videoStateChecker {
-  /* background: #d9ff00; */
-  position: relative;
-  flex: 1;
-  max-width: 70%;
-  height: max-content;
-  margin: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-}
-
-.videoStateCheckerContainer {
-  width: 100%;
-  display: flex;
-  /* flex-direction: row; */
-  justify-content: center;
-}
-
-.container hr {
-  width: 100%;
-}
-
-.lecturePage {
-  display: flex;
-}
-
-.lectureSidebar {
-  height: calc(100% * var(--hex-parent-height));;
-  width: 250px;
-  background-color: #003458;
-  color: #ffffff;
-}
-
-.lectureSidebarComponent {
-  float: left;
-}
-
-.lectureContent {
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.lectureCardContainer {
-  margin: 20px;
-}
-
-.lectureCardsRow {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.lectureCards {
-  background: #ffffff;
-  position: relative;
-  flex: 1;
-  max-width: 60%;
-  height: max-content;
-  margin: 10px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-}
-
-.lectureCards h3{
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 700;
-}
-
-.lectureCards h5 {
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 400;
-  text-align: left;
-}
-
-.lectureTitle {
-  padding-top: 10px;
-  font-weight: 700;
-  font-family: 'Noto Sans', sans-serif;
-}
-
-.lectureDate {
-  color:#b1b1b1;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@800&family=Karla:ital,wght@1,200&family=Merriweather:ital,wght@1,700&display=swap');
-
-.aboutfont{
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 400;
-}
-
-.aboutfont2{
-  font-family: 'Noto Sans', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem
-}
-
-.about {
-  padding-left: 30px;
-  padding-right:30px;
-  padding-top:15px;
-  padding-bottom:15px;
-  margin: 80px;
-  width: 100%;
-  align-items: center;
-  max-width: 90%;
-}
-
-.aboutimg {
-  display: 'block';
-  max-width: 100%;
-  align-items: center;
-}
-
-.abouttitle{
-  font-family: 'Ubuntu', sans-serif;
-  font-weight: 700;
-  font-size: 3rem;
-  text-align: center;
-}
 
 @media (max-width: 600px) {
   .grid {
